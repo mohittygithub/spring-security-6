@@ -5,6 +5,7 @@ import com.tyagi.springsecurity6.model.User;
 import com.tyagi.springsecurity6.repository.RoleRepository;
 import com.tyagi.springsecurity6.repository.UserRepository;
 import com.tyagi.springsecurity6.service.UserService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
     public ApiResponse create(User user) {
         User existingUser = userRepository.findByUsername(user.getEmail()).orElse(null);
         if (existingUser != null) {
-            throw new NullPointerException("User Already Exists");
+            throw new UsernameNotFoundException("User Already Exists");
         }
 
         user.setRole(roleRepository.findByName("ROLES_USER"));
