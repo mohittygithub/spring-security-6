@@ -37,12 +37,13 @@ public class ProductController {
     }
 
     @PostMapping("/bulk")
+    @PreAuthorize("hasAnyAuthority('ROLES_ADMIN')")
     public ApiResponse createMany(@RequestBody List<Product> products){
         return productService.createMany(products);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ROLES_USER')")
+    @PreAuthorize("hasAnyAuthority('ROLES_ADMIN','ROLES_USER')")
     public ApiResponse findById(@PathVariable UUID id){
         return productService.findById(id);
     }

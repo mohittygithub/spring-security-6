@@ -18,6 +18,12 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/test")
+    public String sayHello(){
+        return "Hello";
+    }
+
+
     @PostMapping
     public ApiResponse create(@RequestBody User user) {
         return userService.create(user);

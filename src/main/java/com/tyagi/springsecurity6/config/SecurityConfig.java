@@ -63,7 +63,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/authenticate","/users/create").permitAll()
+                .requestMatchers("/authenticate","/users/create", "/users/test").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
