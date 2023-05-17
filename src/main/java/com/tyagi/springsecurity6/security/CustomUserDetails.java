@@ -13,12 +13,12 @@ public class CustomUserDetails implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
-    private String username;
-    private String password;
-    private Boolean isActive;
-    private Role role;
+    private final String username;
+    private final String password;
+    private final Boolean isActive;
+    private final Role role;
 
-    private List<GrantedAuthority> authorities;
+    private final List<GrantedAuthority> authorities;
 
 
     public CustomUserDetails(User user) {
@@ -41,12 +41,12 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
     @Override
@@ -69,7 +69,4 @@ public class CustomUserDetails implements UserDetails {
         return isActive;
     }
 
-    public Role getRole() {
-        return role;
-    }
 }

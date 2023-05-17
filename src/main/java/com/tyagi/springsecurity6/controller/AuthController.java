@@ -5,6 +5,7 @@ import com.tyagi.springsecurity6.dto.AuthenticationRequest;
 import com.tyagi.springsecurity6.service.JwtService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,8 +29,12 @@ public class AuthController {
     }
 
     @PostMapping("/authenticate")
-    public ApiResponse authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+    public ApiResponse authenticate(@RequestBody AuthenticationRequest authenticationRequest) throws BadCredentialsException {
+        log.info("authenticationRequest===> " + authenticationRequest);
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+
+        log.info("authenticate=====> " + authenticate);
+
 
         if (!authenticate.isAuthenticated()) {
             throw new UsernameNotFoundException("User Not Found: " + authenticationRequest.getUsername());

@@ -27,7 +27,6 @@ public class ProductController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ROLES_ADMIN')")
     public ApiResponse findAll(){
         return productService.findAll();
     }
